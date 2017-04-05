@@ -62,7 +62,7 @@ public class Tester {
         
         element = driver.findElement(By.linkText("continue to application mainpage"));
         element.click();
-        sleep(2);
+        sleep(3);
         element = driver.findElement(By.linkText("logout"));
         element.click();
         sleep(3);

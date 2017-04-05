@@ -54,6 +54,65 @@ public class Stepdefs {
         pageHasContent("Give your credentials to login");
     }     
     
+     @Given("^new user is selected$")
+    public void new_user_is_selected() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions        
+        driver.get(baseUrl);
+        WebElement element = driver.findElement(By.linkText("register new user"));       
+        element.click();        
+    
+    }
+
+    
+    
+    @When("^correct username \"([^\"]*)\" and correct password \"([^\"]*)\" and correct passwordconfirmation \"([^\"]*)\" are given$")
+    public void correct_username_and_correct_password_and_correct_passwordconfirmation_are_given(String username, String password, String passwordConfirmation) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        registerWith(username, password, passwordConfirmation);
+    }
+    
+    @When("^correct username \"([^\"]*)\" and correct password \"([^\"]*)\" and incorrect passwordconfirmation \"([^\"]*)\" are given$")
+    public void correct_username_and_correct_password_and_incorrect_passwordconfirmation_are_given(String username, String password, String passwordConfirmation) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        registerWith(username, password, passwordConfirmation);
+    }
+    
+     @Then("^user is created and welcome page is displayed$")
+    public void user_is_created_and_welcome_page_is_displayed() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        pageHasContent("Welcome");
+    }
+    
+    @When("^incorrect username \"([^\"]*)\" and correct password \"([^\"]*)\" and correct passwordconfirmation \"([^\"]*)\" are given$")
+    public void incorrect_username_and_correct_password_and_correct_passwordconfirmation_are_given(String username, String password, String passwordConfirmation) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        registerWith(username, password, passwordConfirmation);
+    }
+    
+    @When("^existing username \"([^\"]*)\" and correct password \"([^\"]*)\" and correct passwordconfirmation \"([^\"]*)\" are given$")
+    public void existing_username_and_correct_password_and_correct_passwordconfirmation_are_given(String username, String password, String passwordConfirmation) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        registerWith(username, password, passwordConfirmation);
+    }
+    
+    @When("^correct username \"([^\"]*)\" and short password \"([^\"]*)\" and passwordconfirmation \"([^\"]*)\" are given$")
+    public void correct_username_and_short_password_and_passwordconfirmation_are_given(String username, String password, String passwordConfirmation) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        registerWith(username, password, passwordConfirmation);
+    }
+    
+    @When("^correct username \"([^\"]*)\" and simple password \"([^\"]*)\" and passwordconfirmation \"([^\"]*)\" are given$")
+    public void correct_username_and_simple_password_and_passwordconfirmation_are_given(String username, String password, String passwordConfirmation) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        registerWith(username, password, passwordConfirmation);
+    }
+
+    @Then("^user is not created and error \"([^\"]*)\" is reported$")
+    public void user_is_not_created_and_error_is_reported(String errorMessage) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        pageHasContent(errorMessage);
+    }
+        
     @After
     public void tearDown(){
         driver.quit();
@@ -63,6 +122,18 @@ public class Stepdefs {
  
     private void pageHasContent(String content) {
         assertTrue(driver.getPageSource().contains(content));
+    }
+    
+    private void registerWith(String username, String password, String passwordConfirmation) {
+        assertTrue(driver.getPageSource().contains("Create username and give password"));
+        WebElement element = driver.findElement(By.name("username"));
+        element.sendKeys(username);
+        element = driver.findElement(By.name("password"));
+        element.sendKeys(password);
+        element = driver.findElement(By.name("passwordConfirmation"));
+        element.sendKeys(passwordConfirmation);
+        element = driver.findElement(By.name("signup"));
+        element.submit();
     }
         
     private void logInWith(String username, String password) {

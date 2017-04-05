@@ -1,2 +1,5 @@
 pekka;akkep
 jukka;akkuj
+kekkonen;kekk0nen
+gekko;gekk0nen
+apo;aapo0opaa
